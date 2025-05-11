@@ -17,16 +17,7 @@ For more details, see the Project Structure section.
 
 - <b>Output:</b> `staff_directory_data.csv`
 
-<b>2.Unuversity data Scraper using AutoScraper</b>
-- <b>Script:</b>
-- <b>Description:</b>This script uses AutoScraper to extract staff data from a specific university name.
-- <b>Columns and Data</b>
--- Name
--- Title
--- Email
--- Phone Number
-
-<b>3.Faculty Directory Scraper</b>
+<b>2.Faculty Directory Scraper</b>
 - <b>Script:</b>`uni_autoscrape.py`
 - <b>Description:</b>This script uses AutoScraper to extract staff data from a specific university name. 
 - <b>Columns and Data:</b>
