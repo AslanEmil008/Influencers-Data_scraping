@@ -22,10 +22,9 @@ For more details, see the Project Structure section.
 - <b>Description:</b>This script uses AutoScraper to extract staff data from a specific university name. 
 - <b>Columns and Data:</b>
 -- Name
--- Email
 -- Department
 
-- <b>Output:</b> `cornell_faculty.csv`
+- <b>Output:</b> `lboro_faculty.xlsx`
 
 
   # Getting started
