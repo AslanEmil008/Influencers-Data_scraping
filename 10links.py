@@ -1,11 +1,10 @@
-import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.service import Service as FirefoxService
-from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 # URLs to scrape
 urls = [
@@ -27,38 +26,35 @@ data = []
 # Function to scrape each URL
 def scrape_url(url):
     print(f"Scraping URL: {url}")  # Log the current URL
-    driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())) ##launch es anum new chrome browser u set up  es anum install es anum
 
     try:
-        # Use Selenium to access the page
         driver.get(url)
+        time.sleep(5)  # Wait for page to load
 
-        # Give the page some time to load
-        time.sleep(5)  # Increased wait time for page load
-
-        # Scroll to load more content
-        last_height = driver.execute_script("return document.body.scrollHeight")
+        # Scroll to load all content
+        last_height = driver.execute_script("return document.body.scrollHeight") #javascriptov chapuma eji yndhnaur bardzrutyuny scrolli
         while True:
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(2)  # Wait for new content to load
-            new_height = driver.execute_script("return document.body.scrollHeight")
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") #eli scroal anum automaticly minchev verj 
+            time.sleep(2)
+            new_height = driver.execute_script("return document.body.scrollHeight")#eli chapuma bardrutyuny 
             if new_height == last_height:
-                break  # If no new content, exit the loop
-            last_height = new_height
+                break
+            # last_height = new_height
 
-        # Use BeautifulSoup to parse the page content
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        soup = BeautifulSoup(driver.page_source, 'html.parser') #page_Sorce stanuma eji axbyury aysinqn kody html.parsern el toxuma search anel,navigate,hanel tvyalner html ejeric
 
-        # Extract data based on specific HTML structure for each URL
+        # Custom parsing per site (same logic as in your original code)
         if "gsas.yale.edu" in url:
-            for entry in soup.select('.contacts'):
-                name = entry.select_one('.h4').get_text(strip=True) if entry.select_one('.h4') else "None"
-                phone = entry.select_one('a[href^="tel:"]').get_text(strip=True) if entry.select_one('a[href^="tel:"]') else "None"
+            for entry in soup.select('.contacts'): #gtnuma sax diver contacts class ov u heto drancic mejic vekaluma tvyalnery
+                name = entry.select_one('.h4').get_text(strip=True) if entry.select_one('.h4') else "None" ##ete h4 ka name-in veregri ... hakarak depkum none
+                #select_one -y returna anum .h4-y ...texty
+                phone = entry.select_one('a[href^="tel:"]').get_text(strip=True) if entry.select_one('a[href^="tel:"]') else "None" #strip=true vor linuma jnjum et texti verjic skzibic exac bacatnery gciknery...
                 email = entry.select_one('a[href^="mailto:"]').get_text(strip=True) if entry.select_one('a[href^="mailto:"]') else "None"
                 data.append({"Name": name, "Phone": phone, "Email": email})
 
         elif "college.uchicago.edu" in url:
-            for entry in soup.select('li'):  # Select all <li> elements
+            for entry in soup.select('li'):
                 name = entry.select_one('h3.t-heading--small').get_text(strip=True) if entry.select_one('h3.t-heading--small') else "None"
                 phone = entry.select_one('a[href^="tel:"]').get_text(strip=True) if entry.select_one('a[href^="tel:"]') else "None"
                 email = entry.select_one('a[href^="mailto:"]').get_text(strip=True) if entry.select_one('a[href^="mailto:"]') else "None"
@@ -103,16 +99,13 @@ def scrape_url(url):
             for entry in entries:
                 name_elem = entry.select_one('td.emplistname a')
                 name = name_elem.get_text(strip=True) if name_elem else "None"
-
                 email_elem = entry.select_one('td.emplistemail a')
                 if email_elem:
                     email = email_elem.get('onmouseover', "None").replace("this.title=", "").replace("'; return true;", "").strip().strip('"')
                 else:
                     email = "None"
-
                 phone_elem = entry.select_one('td.emplistphone')
                 phone = phone_elem.get_text(strip=True) if phone_elem else "None"
-
                 data.append({"Name": name, "Email": email, "Phone": phone})
 
         elif "library.dartmouth.edu" in url:
@@ -132,13 +125,13 @@ def scrape_url(url):
     except Exception as e:
         print(f"An error occurred while scraping {url}: {e}")
     finally:
-        driver.quit()  # Close the browser after scraping
+        driver.quit()
 
-# Iterate over URLs and scrape
+# Loop through all URLs
 for url in urls:
     scrape_url(url)
 
-# Create a DataFrame and export to CSV
+# Save the results
 df = pd.DataFrame(data)
 df.to_csv("staff_directory_data.csv", index=False)
 print("Data exported to staff_directory_data.csv")
