@@ -34,10 +34,10 @@ For more details, see the Project Structure section.
   git clone https://github.com/AslanEmil008/Large-Scale-Data-Scraping.git
   cd
   ```
-**2.** <b>Then install `requirments.txt`</b>
-```bash
-pip install -r requirements.txt
-```
+  **2.** <b>Then install `requirments.txt`</b>
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 # How to run
 For running `uni_autoscrape.py` you need: <br>
