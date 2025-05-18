@@ -26,30 +26,28 @@ data = []
 # Function to scrape each URL
 def scrape_url(url):
     print(f"Scraping URL: {url}")  # Log the current URL
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())) ##launch es anum new chrome browser u set up  es anum install es anum
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
     try:
         driver.get(url)
         time.sleep(5)  # Wait for page to load
 
         # Scroll to load all content
-        last_height = driver.execute_script("return document.body.scrollHeight") #javascriptov chapuma eji yndhnaur bardzrutyuny scrolli
+        last_height = driver.execute_script("return document.body.scrollHeight") 
         while True:
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") #eli scroal anum automaticly minchev verj 
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") 
             time.sleep(2)
-            new_height = driver.execute_script("return document.body.scrollHeight")#eli chapuma bardrutyuny 
+            new_height = driver.execute_script("return document.body.scrollHeight")
             if new_height == last_height:
                 break
             # last_height = new_height
 
-        soup = BeautifulSoup(driver.page_source, 'html.parser') #page_Sorce stanuma eji axbyury aysinqn kody html.parsern el toxuma search anel,navigate,hanel tvyalner html ejeric
-
+        soup = BeautifulSoup(driver.page_source, 'html.parser') 
         # Custom parsing per site (same logic as in your original code)
         if "gsas.yale.edu" in url:
-            for entry in soup.select('.contacts'): #gtnuma sax diver contacts class ov u heto drancic mejic vekaluma tvyalnery
-                name = entry.select_one('.h4').get_text(strip=True) if entry.select_one('.h4') else "None" ##ete h4 ka name-in veregri ... hakarak depkum none
-                #select_one -y returna anum .h4-y ...texty
-                phone = entry.select_one('a[href^="tel:"]').get_text(strip=True) if entry.select_one('a[href^="tel:"]') else "None" #strip=true vor linuma jnjum et texti verjic skzibic exac bacatnery gciknery...
+            for entry in soup.select('.contacts'):
+                name = entry.select_one('.h4').get_text(strip=True) if entry.select_one('.h4') else "None" 
+                phone = entry.select_one('a[href^="tel:"]').get_text(strip=True) if entry.select_one('a[href^="tel:"]') else "None" 
                 email = entry.select_one('a[href^="mailto:"]').get_text(strip=True) if entry.select_one('a[href^="mailto:"]') else "None"
                 data.append({"Name": name, "Phone": phone, "Email": email})
 
