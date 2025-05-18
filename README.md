@@ -29,7 +29,7 @@ For more details, see the Project Structure section.
 
   # Getting started
   ## Usage
-  <b>Clone the Repository</b>
+  **1** <b>Clone the Repository</b>
   ```bash
   git clone https://github.com/AslanEmil008/Large-Scale-Data-Scraping.git
   cd
