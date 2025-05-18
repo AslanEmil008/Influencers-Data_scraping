@@ -55,6 +55,17 @@ After making the changes, run the code:
 python3 uni_autoscrape.py
 ```
 
+For running `10links.py` <br>
+You need run it using command:
+```bash
+python3 10links.py
+```
+
+
+
+
+
+
   
 
 
