@@ -31,8 +31,9 @@ For more details, see the Project Structure section.
   ## Usage
   **1.** <b>Clone the Repository</b>
   ```bash
-  git clone https://github.com/AslanEmil008/Large-Scale-Data-Scraping.git
-  cd
+  git clone https://github.com/AslanEmil008/Influencers-Data_scraping.git
+  cd Influencers-Data_scraping
+
   ```
   **2.** <b>Then install `requirments.txt`</b>
   ```bash
