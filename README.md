@@ -1,7 +1,7 @@
 # Large Scale Data Scraping
 
 ## Introduction
-Here are three files that scrape data about influencers from various global pages.<br>
+Here are two files that scrape data about influencers from various global pages.<br>
 For more details, see the Project Structure section.
 
 ## Project Strucutre
