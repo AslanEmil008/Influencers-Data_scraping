@@ -29,16 +29,32 @@ For more details, see the Project Structure section.
 
   # Getting started
   ## Usage
-  **1** <b>Clone the Repository</b>
+  **1.** <b>Clone the Repository</b>
   ```bash
   git clone https://github.com/AslanEmil008/Large-Scale-Data-Scraping.git
   cd
   ```
-Then install requirments.txt
+**2.** <b>Then install `requirments.txt`</b>
 ```bash
 pip install -r requirements.txt
 ```
-  
+
+# How to run
+For running `uni_autoscrape.py` you need: <br>
+You can find and change the URL to your own in this part of code. 
+```bash
+url = 'https://www.lborolondon.ac.uk/staff/'
+```
+Update the wanted_list with the names or titles you want to scrape: 
+```bash
+wanted_list = ["Charlene Alves", "Advice Consultant"]
+```
+After making the changes, run the code:
+
+```bash
+python3 uni_autoscrape.py
+```
+
   
 
 
