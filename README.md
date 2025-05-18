@@ -21,8 +21,8 @@ For more details, see the Project Structure section.
 - <b>Script:</b>`uni_autoscrape.py`
 - <b>Description:</b>This script uses AutoScraper to extract staff data from a specific university name. 
 - <b>Columns and Data:</b>
--- Name
--- Department
+  - Name
+  - Department
 
 - <b>Output:</b> `lboro_faculty.xlsx`
 
