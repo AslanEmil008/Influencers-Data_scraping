@@ -10,10 +10,10 @@ For more details, see the Project Structure section.
 - <b>Script:</b>`10links.py`
 - <b>Description:</b> This script scrapes data about staff from 10 university directory websites at the same time and saves the collected data to a CSV file
 - <b>Columns and Data</b>
--- Name
--- Email 
--- Phone Number 
--- University Source URL
+  -- Name
+  -- Email 
+  -- Phone Number 
+  -- University Source URL
 
 - <b>Output:</b> `staff_directory_data.csv`
 
